@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    //var can be updated or redefined
+    var width = 100;
+    console.log(width); //prints 100
+    var width = 200;    //assigns the value 200 to 'width'
+    console.log(width); //prints 200
+
+    //var variables can be function-scoped (only available in the 
+    //function in which they're created) or globably-scoped.
+
+    function setWidth() { // <-- These are like gates; no locally defined variables can be called from outside.
+      var setwidth = 300;
+      console.log(setwidth);
+    }
+
+    setWidth(); // prints 300
+    //console.log(setwidth); // <-Running this would return a
+    //ReferenceError because setwidth is function-scoped and not
+    //globablly available. 
+
+    // Can be done, but not good practice; set a global variable
+    // and change it from within a function.
+    var width;
+    function setAnotherWidth() {
+      width = 400;
+      console.log(width);
+    }
+
+    setAnotherWidth();
+
+    //Where function scoping bites us: if a statement is not 
+    //expliticly a function, any variables declared are global.
+
+    var age = 100; //intentionally globally-scoped
+    if (age > 12) {
+      var dogYears = age * 7; //unintentionally globally-scoped
+      console.log('You are '+dogYears+' dog years old!')
+    }
+
+    //Because var variables are only function-scoped, unless a function
+    //is declared, any declared variables will leak out and be accessible.
+    //One of the benefits of let and const variables are that they are
+    //block-scoped, meaning it's limited to any code between two curly brackets.
+
+    var age = 100; //intentionally globally-scoped
+    if (age > 12) {
+      let catYears = age * 7; //block-scoped; will not leak.
+      console.log('You are '+catYears+' dog years old!')
+    }
+
+    var age = 100; //intentionally globally-scoped
+    if (age > 12) {
+      const mouseYears = age * 7; //block-scoped; will not leak.
+      console.log('You are '+mouseYears+' dog years old!')
+    }
+  
+
+    let height = 200;
+    const key = 'abc123';
+  </script>
+</body>
+</html>
